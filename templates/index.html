@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Webpage Title -->
+    <title> 나의 유튜브 서랍장 | 스파르타 출석 불량자버젼</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <!-- # 1. movie_stars.html 파일에 입력할 수 있는 Youtube 영상 주소를 입력할 수 있는 인풋을 만든다. -->
+    <!--# 2. 그 입력하고 버튼을 누르는 순간 방금 만든 iframe 에 id를 교체해서 실행시킨다.  -->
+    <!--# 3. 유저에서 입력하게 하고... 그 정보든 {}를 활용해서 버튼을 누르게 한다.  -->
+    <!--# 4. {}을 서버에 등록하고 웹페이지에 등록한다. -->
+
+    <script type="text/javascript">
+        function is_long(obj) {
+            let content = $(obj).val();
+            console.log(content);
+            console.log(content.length);
+            if (content.length > 140) {
+                alert('코멘트는 140자까지 기록할 수 있습니다.');
+                $(obj).val(content.substring(0, 140));
+            }
+        }
+
+        // 영상 기록하기 함수입니다.
+        function make_review() {
+            let path = $('#path').val();
+            let content = $('#content').val();
+            let comment = $('#comment').val();
+
+            if (path == '') {
+                alert('경로을 입력해주세요');
+                $('#path').focus();
+                return;
+            } else if (content == '') {
+                alert('내용을 입력해주세요');
+                $('#content').focus();
+                return;
+            } else if (comment == '') {
+                alert('코멘트를 입력해주세요');
+                $('#comment').focus();
+                return;
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: "/reviews",
+                data: {
+                    path_give: path.split('/')[3],
+                    // path_give: path,
+                    content_give: content,
+                    comment_give: comment
+                },
+                success: function(response) {
+                    if (response['result'] == 'success') {
+                        let extra_addr = $('#path').val().split('/')[3];
+                        let real_addr = "https://www.youtube.com/embed/" + extra_addr;
+                        $("#real_addr").attr("src", real_addr);
+                        alert(response['msg']);
+                        $('#path').val('');
+                        $('#content').val('');
+                        $('#comment').val('');
+                        // window.location.reload();
+                    }
+                }
+            })
+
+        }
+
+        function modify_card(path, content, comment) {
+            // 기존에 등록된 내부요소를 삭제한다.
+            $('#orders-box*').remove();
+
+            // 새로운 데이터를 기록한다.
+            let temp_html = '<tr>\
+                                <td>' + path + '</td>\
+                                <td>' + content + '</td>\
+                                <td>' + comment + '</td>\
+                                <td><button onclick="modify_review(path, content, comment)" type="button" class="btn btn-primary"> 수정 </button> </td>\
+                                <td><button onclick="delete_review(path, content, comment)" type="button" class="btn btn-primary"> 삭제 </button> </td>\
+                            </tr>';
+            $('#orders-box').append(temp_html);
+        }
+
+
+        $(document).ready(function() {
+            $('#orders-box').html('');
+            listing();
+        });
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "/reviews",
+                data: {},
+                success: function(response) {
+                    if (response['result'] == 'success') {
+                        let reviews = response['reviews'];
+                        for (let i = 0; i < reviews.length; i++) {
+                            make_card(reviews[i]['path'], reviews[i]['content'], reviews[i]['comment']);
+                        }
+                        let extra_addr = $('#path').val().split('/')[3];
+                        let real_addr = "https://www.youtube.com/embed/" + extra_addr;
+                        $("#real_addr").attr("src", real_addr);
+                    } else {
+                        alert('리뷰를 받아오지 못했습니다');
+                    }
+                }
+            })
+        }
+
+        function make_card(path, content, comment) {
+            let temp_html = `<tr>
+                                <td>${path}</td>
+                                <td>${content}</td>
+                                <td>${comment}</td>
+                                <td><button onclick='modify_review("${path}", "${content}", "${comment}")' type="button" class="btn btn-primary"> 수정 </button> </td>
+                                <td><button onclick='delete_review("${path}", "${content}", "${comment}")' type="button" class="btn btn-primary"> 삭제 </button> </td>
+                            </tr>`;
+            $('#orders-box').append(temp_html);
+        }
+
+
+
+        //  저장된 영상기록을 삭제하는 함수.
+        function delete_review(path, content, comment) {
+
+            console.log('path, content, comment is ', path, content, comment);
+
+            $.ajax({
+                type: "DELETE",
+                url: "/reviews",
+                data: {
+                    path_give: path,
+                    content_give: content,
+                    comment_give: comment
+                },
+                success: function(response) {
+                    if (response['result'] == 'success') {
+                        // alert(response['review']);
+                        alert(response['msg']);
+                        window.location.reload();
+                    }
+                }
+            })
+        }
+    </script>
+
+    <style type="text/css">
+        * {
+            font-family: 'Do Hyeon', sans-serif;
+        }
+        
+        .wrap {
+            width: 500px;
+            margin: auto;
+        }
+        
+        .img {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFzb4EFnYofHnUayxFZrBCJ-K4COxVfhxW8DlDYz6i52VlzsUP&usqp=CAU');
+            background-size: 300px;
+            background-position: center;
+            width: 500px;
+            height: 300px;
+        }
+        
+        .info {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .user-info {
+            margin: 20px 5px auto 5px;
+        }
+        
+        h1,
+        h5 {
+            display: inline;
+        }
+        
+        .order {
+            text-align: center;
+        }
+        
+        .delete {
+            text-align: center;
+        }
+        
+        .orders {
+            margin-top: 100px;
+        }
+        
+        .movie {
+            margin-top: 50px;
+        }
+        
+        .meta_info {
+            width: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="img"></div>
+        <div class="info">
+            <h1>시청하신 유튜브를 기록해 보세요!</h1>
+            <p>평소 즐겨보고 듣고 기억하고 싶은 유튜브 영상과 경로를 기록해보세요. 소비용 기억보다 기록을 통한 깨우침이 중요하지 않을까요?</p>
+        </div>
+        <div class="info">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">경로</span>
+                </div>
+                <input type="text" class="form-control" id="path" aria-describedby="basic-addon3">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">내용</span>
+                </div>
+                <input type="text" class="form-control" id="content" aria-describedby="basic-addon3">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">코멘트</span>
+                </div>
+                <textarea class="form-control" aria-describedby="basic-addon3" name="bookReview" id="comment" cols="30" rows="5" placeholder="140자까지 입력할 수 있습니다." onkeyup="is_long(this)"></textarea>
+            </div>
+
+            <div class="order">
+                <button onclick="make_review()" type="button" class="btn btn-primary">영상 기록하기</button>
+                <button onclick="delete_review(path, content, comment)" type="button" class="btn btn-primary"> 삭제 </button>
+            </div>
+
+            <div class="movie">
+                <iframe id="real_addr" width="500" height="300" src="https://www.youtube.com/embed/SWlIzhwtFtw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="orders">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="meta_info" scope="col">경로</th>
+                        <th class="meta_info" scope="col">내용</th>
+                        <th class="meta_info" scope="col">코멘트</th>
+                        <th class="meta_info" scope="col">수정</th>
+                        <th class="meta_info" scope="col">삭제</th>
+
+                    </tr>
+                </thead>
+                <tbody id="orders-box">
+                    <tr>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

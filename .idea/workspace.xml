@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cd98834b-417f-40cc-b0e7-78ee1d6231fb" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1aZsk1ZdwWJp67VrXvrLlvoEDJ4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="myproject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.server" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cd98834b-417f-40cc-b0e7-78ee1d6231fb" name="Default Changelist" comment="" />
+      <created>1586954589667</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586954589667</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="709" y="295" key="FileChooserDialogImpl" timestamp="1587259253904">
+      <screen x="0" y="0" width="1858" height="1080" />
+    </state>
+    <state x="709" y="295" key="FileChooserDialogImpl/0.0.1858.1080/1920.20.1680.1010@0.0.1858.1080" timestamp="1587259253904" />
+    <state width="816" height="93" key="GridCell.Tab.0.bottom" timestamp="1587214983806">
+      <screen x="1920" y="20" width="1680" height="1010" />
+    </state>
+    <state width="1837" height="104" key="GridCell.Tab.0.bottom/0.0.1858.1080/1920.20.1680.1010@0.0.1858.1080" timestamp="1587130533872" />
+    <state width="816" height="93" key="GridCell.Tab.0.bottom/0.0.1858.1080/1920.20.1680.1010@1920.20.1680.1010" timestamp="1587214983806" />
+    <state width="1837" height="295" key="GridCell.Tab.0.bottom/0.0.1858.1080@0.0.1858.1080" timestamp="1586957664455" />
+    <state width="816" height="93" key="GridCell.Tab.0.center" timestamp="1587214983806">
+      <screen x="1920" y="20" width="1680" height="1010" />
+    </state>
+    <state width="1837" height="104" key="GridCell.Tab.0.center/0.0.1858.1080/1920.20.1680.1010@0.0.1858.1080" timestamp="1587130533872" />
+    <state width="816" height="93" key="GridCell.Tab.0.center/0.0.1858.1080/1920.20.1680.1010@1920.20.1680.1010" timestamp="1587214983806" />
+    <state width="1837" height="295" key="GridCell.Tab.0.center/0.0.1858.1080@0.0.1858.1080" timestamp="1586957664455" />
+    <state width="816" height="93" key="GridCell.Tab.0.left" timestamp="1587214983806">
+      <screen x="1920" y="20" width="1680" height="1010" />
+    </state>
+    <state width="1837" height="104" key="GridCell.Tab.0.left/0.0.1858.1080/1920.20.1680.1010@0.0.1858.1080" timestamp="1587130533871" />
+    <state width="816" height="93" key="GridCell.Tab.0.left/0.0.1858.1080/1920.20.1680.1010@1920.20.1680.1010" timestamp="1587214983806" />
+    <state width="1837" height="295" key="GridCell.Tab.0.left/0.0.1858.1080@0.0.1858.1080" timestamp="1586957664455" />
+    <state width="816" height="93" key="GridCell.Tab.0.right" timestamp="1587214983806">
+      <screen x="1920" y="20" width="1680" height="1010" />
+    </state>
+    <state width="1837" height="104" key="GridCell.Tab.0.right/0.0.1858.1080/1920.20.1680.1010@0.0.1858.1080" timestamp="1587130533872" />
+    <state width="816" height="93" key="GridCell.Tab.0.right/0.0.1858.1080/1920.20.1680.1010@1920.20.1680.1010" timestamp="1587214983806" />
+    <state width="1837" height="295" key="GridCell.Tab.0.right/0.0.1858.1080@0.0.1858.1080" timestamp="1586957664455" />
+    <state x="860" y="185" key="SettingsEditor" timestamp="1586954702934">
+      <screen x="0" y="0" width="1858" height="1080" />
+    </state>
+    <state x="860" y="185" key="SettingsEditor/0.0.1858.1080@0.0.1858.1080" timestamp="1586954702934" />
+    <state x="621" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1587259191277">
+      <screen x="0" y="0" width="1858" height="1080" />
+    </state>
+    <state x="621" y="364" key="com.intellij.ide.util.TipDialog/0.0.1858.1080/1920.20.1680.1010@0.0.1858.1080" timestamp="1587259191277" />
+    <state x="2482" y="360" key="com.intellij.ide.util.TipDialog/0.0.1858.1080/1920.20.1680.1010@1920.20.1680.1010" timestamp="1587193059558" />
+  </component>
+</project>
